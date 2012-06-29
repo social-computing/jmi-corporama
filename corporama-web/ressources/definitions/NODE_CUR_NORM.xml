@@ -115,10 +115,10 @@
 	</event>
 
 	<menu id="menu" font="menuFnt">
-		<item label="Display" font="nameFnt" url="javascript:JMIF_Navigate({sURL})" />
-		<item label="Center" font="nameFnt" url="javascript:JMIF_Center({sID},{sNAME})" />
+		<item label="Display" font="nameFnt" url="javascript:Navigate({sURL})" />
+		<item label="Center" font="nameFnt" url="javascript:Center({sID},{sNAME})" />
 		<separator />
-		<item label="[+30sPOSS_NAME]" url="javascript:JMIF_Focus([sPOSS_ID],[sPOSS_NAME])" />
+		<item label="[+30sPOSS_NAME]" url="javascript:Focus([sPOSS_ID],[sPOSS_NAME])" />
 	</menu>
 
 		<font id="menuFnt" name="Arial" size="11" style="plain" />
