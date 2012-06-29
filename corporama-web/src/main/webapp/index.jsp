@@ -8,7 +8,7 @@
 html, body {
 	height: 100%;
 }
-#map {
+#jmi-map {
 	width: 100%;
 	height: 80%;
 	background-color: #FFFFFF;
@@ -20,20 +20,23 @@ img {
 <link rel="stylesheet" type="text/css" href="./jmi-client/css/jmi-client.css" />
 <script type="text/javascript" src="./jmi-client/jmi-client.js"></script>
 <script type="text/javascript" src="./js/jmi-corporama.js"></script>
+<script type="text/javascript">
+function GoMap() {
+	var map = new JMI.Corporama.Map('jmi-map');
+	map.draw({breadcrumb:'jmi-breadcrumb'});
+};
+</script>
 </head>
 <body onload="GoMap()">
 <form id="main" method="get">
 <table width="100%" border="0">
 	<tr>
 		<td><a title="Just Map It! Corporama" href="./"><img alt="Just Map It! Corporama" src="./images/justmapit.png" /></a></td>
-		<td>
-			<input type="submit" value="Just Map It!" />
-		</td>
-		<td align="right"><a title="Just Map It!" href="http://www.just-map-it.com/" target="_blank"><img alt="Just Map It!" src="./images/justmapit.png" /></a></td>
+		<td align="right"><a title="Just Map It!" href="http://www.just-map-it.com/" target="_blank"><img alt="Just Map It!" src="./images/justmapit_www.png" /></a></td>
 	</tr>
 </table>
 </form>
-<div id="breadcrumb">&nbsp;</div>
-<div id="map"></div>
+<div id="jmi-breadcrumb">&nbsp;</div>
+<div id="jmi-map"></div>
 </body>
 </html>

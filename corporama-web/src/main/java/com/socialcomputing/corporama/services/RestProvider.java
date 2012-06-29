@@ -19,7 +19,7 @@ import com.socialcomputing.wps.server.planDictionnary.connectors.datastore.Entit
 import com.socialcomputing.wps.server.planDictionnary.connectors.datastore.StoreHelper;
 import com.socialcomputing.wps.server.planDictionnary.connectors.utils.UrlHelper;
 
-@Path("/template")
+@Path("/")
 public class RestProvider {
 
     private static final ObjectMapper mapper = new ObjectMapper();
@@ -30,11 +30,11 @@ public class RestProvider {
     public String kind(@Context HttpServletRequest request, @QueryParam("query") String query) {
         HttpSession session = request.getSession(true);
         String key = query;
-        String result = ( String)session.getAttribute( key);
+        String result = null;//( String)session.getAttribute( key);
         if (result == null || result.length() == 0) {
             try {
                 result = extract(query);
-                session.setAttribute( key, result);
+                //session.setAttribute( key, result);
             }
             catch (Exception e) {
                 result = StoreHelper.ErrorToJson(e);
@@ -45,18 +45,17 @@ public class RestProvider {
     
     private String extract(String query) throws Exception {
         StoreHelper storeHelper = new StoreHelper();
-        UrlHelper urlNodes = new UrlHelper( "REST_URL");
-        urlNodes.addParameter( "param1", "value1");
-        urlNodes.addParameter( "param2", "value2");
+        UrlHelper urlNodes = new UrlHelper( "http://corporama.com/api/prospect?v=1.0&key=Y29ycG9fcGFydG&user=social_computing&f-region=98&q=&exec=1&q-filters=word&q-filters=naf&q-filters=company_name");
+        //urlNodes.addParameter( "param1", "value1");
+        //urlNodes.addParameter( "param2", "value2");
         urlNodes.openConnections();
-        JsonNode nodes = mapper.readTree(urlNodes.getStream());
+        JsonNode nodes = mapper.readTree(urlNodes.getStream()).get("response").get("results").get("companies");
         for (JsonNode node : (ArrayNode) nodes) {
-            Attribute att = storeHelper.addAttribute(node.get("id").getTextValue());
-            att.addProperty("name", node.get("title").getTextValue());
-            att.addProperty("url", node.get("link").getTextValue());
+            Attribute att = storeHelper.addAttribute(node.get("SIREN").getTextValue());
+            att.addProperty("name", node.get("name").getTextValue());
             
-            Entity ent = storeHelper.addEntity(node.get("xxxx").getTextValue());
-            ent.addAttribute( att, 1);
+            //Entity ent = storeHelper.addEntity(node.get("xxxx").getTextValue());
+//            /ent.addAttribute( att, 1);
             /// ....
         }
         urlNodes.closeConnections();
