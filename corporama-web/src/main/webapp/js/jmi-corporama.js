@@ -8,9 +8,6 @@ JMI.Corporama.Map = function(container) {
 		  //server: 'http://localhost:8080/jmi-server',
 		  clientUrl: './jmi-client/' 
 		};
-/*  if (jQuery.browser.msie) {
-	  options.client = JMI.Map.SWF;
-  }*/
   this.map = JMI.Map(options);
   this.map.corporama = this;
   this.map.addEventListener(JMI.Map.event.ACTION, function(event) {
@@ -46,6 +43,24 @@ JMI.Corporama.Map.prototype.getParams = function() {
     jsessionid: this.session
 	};
 };
+
+JMI.Corporama.Map.prototype.Center = function(map, args) {
+  var parameters = this.getParams();
+  parameters.attributeId = args[0];
+  parameters.analysisProfile = "DiscoveryProfile";
+  map.compute( parameters);
+  map.corporama.breadcrumbTitles.shortTitle = 'centered';
+  map.corporama.breadcrumbTitles.longTitle = 'centered on ' + args[1];
+};   
+
+JMI.Corporama.Map.prototype.Focus = function(map, args) {
+  var parameters = this.getParams();
+  parameters.entityId = args[0];
+  parameters.analysisProfile = "Profile";
+  map.compute( parameters);
+  map.corporama.breadcrumbTitles.shortTitle = 'focus';
+  map.corporama.breadcrumbTitles.longTitle = 'focus on ' + args[1];
+};   
 
 JMI.Corporama.Map.breadcrumbTitlesFunc = function(event) {
   if( event.type === JMI.Map.event.EMPTY) {
