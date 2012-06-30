@@ -1,5 +1,7 @@
 package com.socialcomputing.corporama.services;
 
+import java.util.Iterator;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.GET;
@@ -51,12 +53,16 @@ public class RestProvider {
         urlNodes.openConnections();
         JsonNode nodes = mapper.readTree(urlNodes.getStream()).get("response").get("results").get("companies");
         for (JsonNode node : (ArrayNode) nodes) {
-            Attribute att = storeHelper.addAttribute(node.get("SIREN").getTextValue());
+            Attribute att = storeHelper.addAttribute(node.get("siren").getTextValue());
             att.addProperty("name", node.get("name").getTextValue());
-            
-            //Entity ent = storeHelper.addEntity(node.get("xxxx").getTextValue());
-//            /ent.addAttribute( att, 1);
-            /// ....
+        
+            JsonNode words = node.get("words");
+            Iterator<String> it = words.getFieldNames(); 
+            while( it.hasNext()) {
+                Entity ent = storeHelper.addEntity(it.next());
+                ent.addProperty("name", ent.getId());
+                ent.addAttribute( att, words.get(ent.getId()).getLongValue());
+            }
         }
         urlNodes.closeConnections();
         return storeHelper.toJson();
