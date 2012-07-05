@@ -1,6 +1,7 @@
 package com.socialcomputing.corporama.services;
 
 import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -29,14 +30,20 @@ public class RestProvider {
     @GET
     @Path("maps/map.json")
     @Produces(MediaType.APPLICATION_JSON)
-    public String kind(@Context HttpServletRequest request, @QueryParam("query") String query) {
+    public String kind(@Context HttpServletRequest request, 
+                       @QueryParam("v") String v,
+                       @QueryParam("key") String key,
+                       @QueryParam("user") String user,
+                       @QueryParam("f-region") String fRegion,
+                       @QueryParam("q-filters") List<String> qFilters)
+    {
         HttpSession session = request.getSession(true);
-        String key = query;
-        String result = null;//( String)session.getAttribute( key);
+        String k = key;
+        String result = null;//( String)session.getAttribute( k);
         if (result == null || result.length() == 0) {
             try {
-                result = extract(query);
-                //session.setAttribute( key, result);
+                result = extract(v,key,user,fRegion,qFilters);
+                //session.setAttribute( k, result);
             }
             catch (Exception e) {
                 result = StoreHelper.ErrorToJson(e);
@@ -45,11 +52,16 @@ public class RestProvider {
         return result;
     }
     
-    private String extract(String query) throws Exception {
+    private String extract(String v,String key,String user,String fRegion,List<String> qFilters) throws Exception {
         StoreHelper storeHelper = new StoreHelper();
-        UrlHelper urlNodes = new UrlHelper( "http://corporama.com/api/prospect?v=1.0&key=Y29ycG9fcGFydG&user=social_computing&f-region=98&q=&exec=1&q-filters=word&q-filters=naf&q-filters=company_name");
-        //urlNodes.addParameter( "param1", "value1");
-        //urlNodes.addParameter( "param2", "value2");
+        UrlHelper urlNodes = new UrlHelper( "http://corporama.com/api/prospect");
+        //?v=1.0&key=Y29ycG9fcGFydG&user=social_computing&f-region=98&q=&exec=1&q-filters=word&q-filters=naf&q-filters=company_name");
+        urlNodes.addParameter( "v", v);
+        urlNodes.addParameter( "key", key);
+        urlNodes.addParameter( "user", user);
+        urlNodes.addParameter( "f-region", fRegion);
+        for( String filter : qFilters)
+            urlNodes.addParameter( "q-filters", filter);
         urlNodes.openConnections();
         JsonNode nodes = mapper.readTree(urlNodes.getStream()).get("response").get("results").get("companies");
         for (JsonNode node : (ArrayNode) nodes) {
