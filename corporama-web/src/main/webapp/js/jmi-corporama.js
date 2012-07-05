@@ -6,7 +6,7 @@ JMI.Corporama.Map = function(container) {
   var options = {
 		  parent: this.container, 
 		  //server: 'http://localhost:8080/jmi-server',
-		  clientUrl: './jmi-client/' 
+		  clientUrl: '../jmi-client/' 
 		};
   this.map = JMI.Map(options);
   this.map.corporama = this;
