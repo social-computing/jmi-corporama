@@ -7,16 +7,13 @@
 
 	<entities>
 		<REST-entities name="Corporama" type="json" invert="false" >
-			<URL-connection type="GET">
+			<URL-connection type="POST">
 				<url>{$corporamaserverurl}/rest/maps/map.json</url>
 				<url-header name="Cookie">JSESSIONID={$jsessionid}</url-header>
 				<url-parameter name="v" >1.0</url-parameter>
 				<url-parameter name="key" >Y29ycG9fcGFydG</url-parameter>
 				<url-parameter name="user" >social_computing</url-parameter>
-				<url-parameter name="f-region" >98</url-parameter>
-				<url-parameter name="q-filters" >words</url-parameter>
-				<url-parameter name="q-filters" >naf</url-parameter>
-				<url-parameter name="q-filters" >company_name</url-parameter>
+				<url-parameter name="query" default="">{$query}</url-parameter>
 			</URL-connection>
 	
 			<REST-entity markup="entities" id="id">

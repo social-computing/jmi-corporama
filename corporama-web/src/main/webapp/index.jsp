@@ -22,8 +22,8 @@ img {
 <script type="text/javascript" src="./js/jmi-corporama.js"></script>
 <script type="text/javascript">
 function GoMap() {
-	var map = new JMI.Corporama.Map('jmi-map');
-	map.draw({breadcrumb:'jmi-breadcrumb'});
+	var map = new JMI.Corporama.Map('jmi-map',{clientUrl:'../jmi-client/',breadcrumb:'jmi-breadcrumb'});
+	map.draw( { corporama: {query: location.search}});
 };
 </script>
 </head>

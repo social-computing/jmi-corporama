@@ -1,14 +1,14 @@
 package com.socialcomputing.corporama.services;
 
 import java.util.Iterator;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.ws.rs.GET;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
@@ -16,7 +16,6 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ArrayNode;
 
-import com.socialcomputing.wps.server.planDictionnary.connectors.JMIException;
 import com.socialcomputing.wps.server.planDictionnary.connectors.datastore.Attribute;
 import com.socialcomputing.wps.server.planDictionnary.connectors.datastore.Entity;
 import com.socialcomputing.wps.server.planDictionnary.connectors.datastore.StoreHelper;
@@ -26,23 +25,28 @@ import com.socialcomputing.wps.server.planDictionnary.connectors.utils.UrlHelper
 public class RestProvider {
 
     private static final ObjectMapper mapper = new ObjectMapper();
+    /*private static final String[] QueryParams = {
+               "v", "key", "user",
+               "q","f-zip","f-region","f-section","f-status_group","f-status_detail","f-head_count_slice",
+               "f-revenue_slice","f-creation_date_slice","f-capital_slice","q-filters"
+    };*/
     
-    @GET
+    @POST
     @Path("maps/map.json")
+    @Consumes("application/x-www-form-urlencoded")
     @Produces(MediaType.APPLICATION_JSON)
     public String kind(@Context HttpServletRequest request, 
-                       @QueryParam("v") String v,
-                       @QueryParam("key") String key,
-                       @QueryParam("user") String user,
-                       @QueryParam("f-region") String fRegion,
-                       @QueryParam("q-filters") List<String> qFilters)
+                                           @FormParam("v") String v, 
+                                           @FormParam("key") String key,
+                                           @FormParam("user") String user, 
+                                           @FormParam("query") String query) 
     {
         HttpSession session = request.getSession(true);
-        String k = key;
+        String k = "";
         String result = null;//( String)session.getAttribute( k);
         if (result == null || result.length() == 0) {
             try {
-                result = extract(v,key,user,fRegion,qFilters);
+                result = extract( v, key, user, query);
                 //session.setAttribute( k, result);
             }
             catch (Exception e) {
@@ -52,18 +56,14 @@ public class RestProvider {
         return result;
     }
     
-    private String extract(String v,String key,String user,String fRegion,List<String> qFilters) throws Exception {
+    private String extract( String v, String key, String user, String query) throws Exception {
         StoreHelper storeHelper = new StoreHelper();
-        UrlHelper urlNodes = new UrlHelper( "http://corporama.com/api/prospect");
-        //?v=1.0&key=Y29ycG9fcGFydG&user=social_computing&f-region=98&q=&exec=1&q-filters=word&q-filters=naf&q-filters=company_name");
-        urlNodes.addParameter( "v", v);
-        urlNodes.addParameter( "key", key);
-        urlNodes.addParameter( "user", user);
-        urlNodes.addParameter( "f-region", fRegion);
-        for( String filter : qFilters)
-            urlNodes.addParameter( "q-filters", filter);
-        urlNodes.openConnections();
-        JsonNode nodes = mapper.readTree(urlNodes.getStream()).get("response").get("results").get("companies");
+        UrlHelper corporama = new UrlHelper( "http://corporama.com/api/prospect" + query);
+        corporama.addParameter("v", v);
+        corporama.addParameter("key", key);
+        corporama.addParameter("user", user);
+        corporama.openConnections();
+        JsonNode nodes = mapper.readTree(corporama.getStream()).get("response").get("results").get("companies");
         for (JsonNode node : (ArrayNode) nodes) {
             Attribute att = storeHelper.addAttribute(node.get("siren").getTextValue());
             att.addProperty("name", node.get("name").getTextValue());
@@ -76,7 +76,7 @@ public class RestProvider {
                 ent.addAttribute( att, words.get(ent.getId()).getLongValue());
             }
         }
-        urlNodes.closeConnections();
+        corporama.closeConnections();
         return storeHelper.toJson();
     }
     
