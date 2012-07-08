@@ -7,7 +7,7 @@ JMI.Corporama.Map = function(container,options) {
   this.options.clientUrl =  options.clientUrl || '../jmi-client/';
   this.map = JMI.Map({
 	  parent: this.container, 
-	  server: 'http://localhost:8080/jmi-server',
+	  //server: 'http://localhost:8080/jmi-server',
 	  clientUrl: this.options.clientUrl
 	});
   this.map.corporama = this;
@@ -38,8 +38,8 @@ JMI.Corporama.Map.prototype.draw = function(options) {
 JMI.Corporama.Map.prototype.getParams = function() {
   var params = { 
 	map: 'Corporama',
-    corporamaserverurl: 'http://localhost:8080/corporama-web',
-    //corporamaserverurl: 'http://corporama.just-map-it.com',
+    //corporamaserverurl: 'http://localhost:8080/corporama-web',
+    corporamaserverurl: 'http://corporama.just-map-it.com',
     jsessionid: this.session
   };
   for (var a in this.options.corporama) { 
