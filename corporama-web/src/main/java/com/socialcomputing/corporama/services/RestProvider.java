@@ -61,7 +61,12 @@ public class RestProvider {
     
     private String extract( String v, String key, String user, String query, String limit, String similar) throws Exception {
         StoreHelper storeHelper = new StoreHelper();
-        UrlHelper corporama = new UrlHelper( "http://corporama.com/api/prospect" + query);
+        UrlHelper corporama = new UrlHelper( "http://corporama.com/api/prospect");
+        for( String cp : query.startsWith("?") ? query.substring(1).split("&") : query.split("&")) {
+            String p[] = cp.split("=");
+            if( p.length == 2)
+                corporama.addParameter(p[0], java.net.URLDecoder.decode(p[1], "UTF-8"));
+        }
         corporama.addParameter("v", v);
         corporama.addParameter("key", key);
         corporama.addParameter("user", user);
