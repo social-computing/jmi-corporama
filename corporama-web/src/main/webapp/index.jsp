@@ -8,13 +8,36 @@
 html, body {
 	height: 100%;
 }
+#jmi-content {
+    margin-left: auto;
+    margin-right: auto;
+    width: 960px;
+    height: 80%;
+	background-color: #FFFFFF;
+}
 #jmi-map {
 	width: 100%;
-	height: 80%;
+	height: 100%;
 	background-color: #FFFFFF;
 }
 img {
 	border: 0;
+}
+#jmi-slideshow {
+	width: 500px;
+	height: 300px;
+	font-family:Arial, Verdana, sans-serif;	
+	background:url(http://www.google.com/ig/images/spinner.gif) no-repeat top right #ffffff;
+	border:3px solid #006699;
+}
+#jmi-slideshow li {
+	padding: 10px 15px;
+}
+#jmi-slideshow p {
+	text-align: center;
+	padding: 10px 0px;
+	font-size:20px;	
+	color:#335595;
 }
 </style>
 <link rel="stylesheet" type="text/css" href="./jmi-client/css/jmi-client.css" />
@@ -28,15 +51,21 @@ function GoMap() {
 </script>
 </head>
 <body onload="GoMap()">
-<form id="main" method="get">
-<table width="100%" border="0">
-	<tr>
-		<td><a title="Just Map It! Corporama" href="./"><img alt="Just Map It! Corporama" src="./images/justmapit.png" /></a></td>
-		<td align="right"><a title="Just Map It!" href="http://www.just-map-it.com/" target="_blank"><img alt="Just Map It!" src="./images/justmapit_www.png" /></a></td>
-	</tr>
-</table>
-</form>
-<div id="jmi-breadcrumb">&nbsp;</div>
-<div id="jmi-map"></div>
+<div id="jmi-content">
+	<table width="100%" border="0">
+		<tr>
+			<td><a title="Just Map It! Corporama" href="./"><img alt="Just Map It! Corporama" src="./images/justmapit.png" /></a></td>
+			<td align="right"><a title="Just Map It!" href="http://www.just-map-it.com/" target="_blank"><img alt="Just Map It!" src="./images/justmapit_www.png" /></a></td>
+		</tr>
+	</table>
+	<div id="jmi-breadcrumb">&nbsp;</div>
+	<div id="jmi-map"></div>
+</div>
+<div id="jmi-slideshow" style="visibility:hidden;">
+	<ul>
+		<li><p>Corporama</p></li>
+		<li><p>Bla bla bla</p></li>
+	</ul>
+</div>
 </body>
 </html>

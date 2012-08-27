@@ -76,11 +76,11 @@
 	<shape id="spotShp" scale="0.2" anchor="center">
 	</shape>
 
-	<font id="nameFnt" name="Arial" size="12" style="bold" />
-	<font id="italicFnt" name="Arial" size="12" style="italic" />
-	<font id="selFnt" name="Arial" size="12" style="bold" />
+	<font id="nameFnt" name="Arial" size="11" style="bold" />
+	<font id="italicFnt" name="Arial" size="11" style="italic" />
+	<font id="selFnt" name="Arial" size="11" style="bold" />
 
-        <transfo id="voidTrf" scale="0.01" map="absolute" />
+    <transfo id="voidTrf" scale="0.01" map="absolute" />
 	<transfo id="spotTrf" scale="0.2" map="absolute" />
 	<transfo id="imgTrf" scale="1.2" map="absolute" />
 	<transfo id="baseTrf" map="interpol" scale="0">
@@ -92,21 +92,22 @@
 
 	<tip id="textTip" font="nameFnt" label="@nameStr" textCol="@blackCol" isCorner="true" blur="-1" rounded="-1" dir="SW" align="left" isFloating="false" />
 
-	<!--tooltip    id="tooltip"
-				delay="500"
-				length="30000">
+	<tooltip    id="tooltip"
+				delay="1000"
+				length="5000">
 		<tip 	font="nameFnt"
-				url="{s$web_context}/facebook/people.jsp?id={sID}&code={s$fbauthcode}"
-				inCol="63 127 223"
+				label="{sNAME}&lt;br/&gt;{sNAF}&lt;br/&gt;{sZIP} {sCITY}"
+				inCol="00 102 160"
 				textCol="@whiteCol"
 				align="center"
+				rounded="10"
 				isFloating="true"/>
-	</tooltip-->
+	</tooltip>
 
 	<!-- Hover event -->
 	<event id="hoverEvt">
-		<show status="Cliquez pour afficher le menu de '{sNAME}'. Double-cliquez pour afficher sa fiche." />
-		<!--pop        tooltip="tooltip"/-->
+		<!-- show status="Cliquez pour afficher le menu de '{sNAME}'. Double-cliquez pour afficher sa fiche." /-->
+		<pop        tooltip="tooltip"/>
 	</event>
 
 	<!-- Click event -->
@@ -115,10 +116,10 @@
 	</event>
 
 	<menu id="menu" font="menuFnt">
-		<item label="Display" font="nameFnt" url="javascript:Navigate({sURL})" />
-		<item label="Center" font="nameFnt" url="javascript:Center({sID},{sNAME})" />
+		<item label="Afficher" font="nameFnt" url="javascript:Navigate({sID},{sNAME})" />
+		<item label="Centrer" font="nameFnt" url="javascript:Center({sID},{sNAME})" />
 		<separator />
-		<item label="[+30sPOSS_NAME]" url="javascript:Focus([sPOSS_ID],[sPOSS_NAME])" />
+		<item label="[/5sPOSS_NAME]" url="javascript:Focus([sPOSS_ID],[sPOSS_NAME])" />
 	</menu>
 
 		<font id="menuFnt" name="Arial" size="11" style="plain" />

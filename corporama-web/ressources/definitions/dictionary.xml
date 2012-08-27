@@ -13,7 +13,9 @@
 				<url-parameter name="v" >1.0</url-parameter>
 				<url-parameter name="key" >Y29ycG9fcGFydG</url-parameter>
 				<url-parameter name="user" >social_computing</url-parameter>
+				<url-parameter name="api-limit" >100</url-parameter>
 				<url-parameter name="query" default="">{$query}</url-parameter>
+				<url-parameter name="similar" default="">{$similar}</url-parameter>
 			</URL-connection>
 	
 			<REST-entity markup="entities" id="id">
@@ -24,6 +26,11 @@
 	
 			<REST-attribute markup="attributes" id="id">
 				<REST-property id="name" />
+				<REST-property id="NAF" />
+				<REST-property id="status_detail" />
+				<REST-property id="capital" />
+				<REST-property id="city" />
+				<REST-property id="zip" />
 				<REST-property id="poss_id" entity="id" />
 				<REST-property id="poss_name" entity="name" />
 			</REST-attribute>
@@ -35,7 +42,7 @@
 	<affinity-reader-profile name="DiscoveryAffReader" affinity-reader-ref="*" threshold="100" max-entities="2000" />
 	<affinity-reader-profile name="GlobalAffReader" affinity-reader-ref="*" threshold="100" max-entities="2000" />
 
-	<analysis-profile name="Profile" attributes-ref="*" type="personal" attribute-size="frequency" attributes-max="80" attributes-cluster-max="6" cluster="yes" cluster-level="50" cluster-threshold="20" cluster-type="size" balanced-effect="0" entities-max="100" attributes-base-max="30" attr-link-threshold="10" links-attribute-threshold="3">
+	<analysis-profile name="Profile" attributes-ref="*" type="personal" attribute-size="frequency" attributes-max="50" attributes-cluster-max="6" cluster="yes" cluster-level="50" cluster-threshold="20" cluster-type="size" balanced-effect="0" entities-max="100" attributes-base-max="30" attr-link-threshold="10" links-attribute-threshold="3">
 		<props-mapping>
 			<entity-props-mapping>
 				<mapping key="ID" value="id" />
@@ -44,6 +51,11 @@
 			<attribute-props-mapping>
 				<mapping key="ID" value="id" />
 				<mapping key="NAME" value="name" />
+				<mapping key="NAF" value="NAF" />
+				<mapping key="STATUS_DETAIL" value="status_detail" />
+				<mapping key="CAPITAL" value="capital" />
+				<mapping key="CITY" value="city" />
+				<mapping key="ZIP" value="zip" />
 				<mapping key="POSS_ID" value="poss_id" />
 				<mapping key="POSS_NAME" value="poss_name" />
 			</attribute-props-mapping>
@@ -54,7 +66,7 @@
 		</entities-recommendation>
 	</analysis-profile>
 
-	<analysis-profile name="DiscoveryProfile" attributes-ref="*" type="discovery" attribute-size="frequency" attributes-max="80" attributes-cluster-max="6" cluster="yes" cluster-level="50" cluster-threshold="20" cluster-type="size" balanced-effect="0" entities-max="100" attributes-base-max="30" attr-link-threshold="10" links-attribute-threshold="3">
+	<analysis-profile name="DiscoveryProfile" attributes-ref="*" type="discovery" attribute-size="frequency" attributes-max="50" attributes-cluster-max="6" cluster="yes" cluster-level="50" cluster-threshold="20" cluster-type="size" balanced-effect="0" entities-max="100" attributes-base-max="30" attr-link-threshold="10" links-attribute-threshold="3">
 		<props-mapping>
 			<entity-props-mapping>
 				<mapping key="ID" value="id" />
@@ -63,6 +75,11 @@
 			<attribute-props-mapping>
 				<mapping key="ID" value="id" />
 				<mapping key="NAME" value="name" />
+				<mapping key="NAF" value="NAF" />
+				<mapping key="STATUS_DETAIL" value="status_detail" />
+				<mapping key="CAPITAL" value="capital" />
+				<mapping key="CITY" value="city" />
+				<mapping key="ZIP" value="zip" />
 				<mapping key="POSS_ID" value="poss_id" />
 				<mapping key="POSS_NAME" value="poss_name" />
 			</attribute-props-mapping>
@@ -73,7 +90,7 @@
 		</entities-recommendation>
 	</analysis-profile>
 
-	<analysis-profile name="GlobalProfile" attributes-ref="*" type="global" attribute-size="same" attributes-max="80" attributes-cluster-max="6" cluster="yes" cluster-level="50" cluster-threshold="20" cluster-type="size" balanced-effect="0" entities-max="100" attributes-base-max="30" attr-link-threshold="10" links-attribute-threshold="3">
+	<analysis-profile name="GlobalProfile" attributes-ref="*" type="global" attribute-size="same" attributes-max="50" attributes-cluster-max="6" cluster="yes" cluster-level="50" cluster-threshold="20" cluster-type="size" balanced-effect="0" entities-max="100" attributes-base-max="30" attr-link-threshold="10" links-attribute-threshold="3">
 
 		<props-mapping>
 			<entity-props-mapping>
@@ -83,6 +100,11 @@
 			<attribute-props-mapping>
 				<mapping key="ID" value="id" />
 				<mapping key="NAME" value="name" />
+				<mapping key="NAF" value="NAF" />
+				<mapping key="STATUS_DETAIL" value="status_detail" />
+				<mapping key="CAPITAL" value="capital" />
+				<mapping key="CITY" value="city" />
+				<mapping key="ZIP" value="zip" />
 				<mapping key="POSS_ID" value="poss_id" />
 				<mapping key="POSS_NAME" value="poss_name" />
 			</attribute-props-mapping>
@@ -111,7 +133,7 @@
 		<selection-swatch name="search" />
 	</display-profile>
 
-	<display-profile name="GlobalDisplay" display-empty-links="no" display-fake-links="no" in-color="ffffff" out-color="0" filter-color="eaeaea" display-entities="no">
+	<display-profile name="GlobalDisplay" display-empty-links="no" display-fake-links="yes" in-color="ffffff" out-color="0" filter-color="eaeaea" display-entities="no">
 		<swatch-segmentation>
 			<attribute-swatch>
 				<norm-swatch default-ref="NODE_NORM" />

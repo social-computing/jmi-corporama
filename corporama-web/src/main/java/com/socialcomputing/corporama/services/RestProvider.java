@@ -1,6 +1,7 @@
 package com.socialcomputing.corporama.services;
 
 import java.util.Iterator;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -39,14 +40,16 @@ public class RestProvider {
                                            @FormParam("v") String v, 
                                            @FormParam("key") String key,
                                            @FormParam("user") String user, 
-                                           @FormParam("query") String query) 
+                                           @FormParam("query") String query,
+                                           @FormParam("api-limit") String limit,
+                                           @FormParam("similar") String similar) 
     {
         HttpSession session = request.getSession(true);
         String k = "";
         String result = null;//( String)session.getAttribute( k);
         if (result == null || result.length() == 0) {
             try {
-                result = extract( v, key, user, query);
+                result = extract( v, key, user, query, limit, similar);
                 //session.setAttribute( k, result);
             }
             catch (Exception e) {
@@ -56,17 +59,30 @@ public class RestProvider {
         return result;
     }
     
-    private String extract( String v, String key, String user, String query) throws Exception {
+    private String extract( String v, String key, String user, String query, String limit, String similar) throws Exception {
         StoreHelper storeHelper = new StoreHelper();
         UrlHelper corporama = new UrlHelper( "http://corporama.com/api/prospect" + query);
         corporama.addParameter("v", v);
         corporama.addParameter("key", key);
         corporama.addParameter("user", user);
+        corporama.addParameter("api-limit", limit);
+        if( similar.length() > 0)
+            corporama.addParameter("similar", similar);
         corporama.openConnections();
         JsonNode nodes = mapper.readTree(corporama.getStream()).get("response").get("results").get("companies");
         for (JsonNode node : (ArrayNode) nodes) {
             Attribute att = storeHelper.addAttribute(node.get("siren").getTextValue());
-            att.addProperty("name", node.get("name").getTextValue());
+            for( Iterator<Entry<String, JsonNode>> it = node.getFields(); it.hasNext(); ) {
+                Entry<String, JsonNode> entry = it.next();
+                if( !entry.getKey().equalsIgnoreCase("siren")) {
+                    if( entry.getValue().isTextual())
+                        att.addProperty(entry.getKey(), entry.getValue().getTextValue());
+                    else if( entry.getValue().isLong())
+                        att.addProperty(entry.getKey(), entry.getValue().getLongValue());
+                    else if( entry.getValue().isInt())
+                        att.addProperty(entry.getKey(), entry.getValue().getIntValue());
+                }
+            }
         
             JsonNode words = node.get("words");
             Iterator<String> it = words.getFieldNames(); 

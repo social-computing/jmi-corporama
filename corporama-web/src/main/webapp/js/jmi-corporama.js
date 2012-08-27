@@ -22,9 +22,9 @@ JMI.Corporama.Map = function(container,options) {
 	} );
   if( options.breadcrumb) {
 	  new JMI.extensions.Breadcrumb(options.breadcrumb,this.map,{'namingFunc':JMI.Corporama.Map.breadcrumbTitlesFunc,'thumbnail':{}});
-	  this.breadcrumbTitles = { shortTitle: 'Hello world!', longTitle: 'Hello world!' };
+	  this.breadcrumbTitles = { shortTitle: 'Recherche', longTitle: 'Résultat de la recherche' };
   }
-  new JMI.extensions.Slideshow(this.map);//, 'slideshow', 500, 300, 5000);
+  new JMI.extensions.Slideshow(this.map, 'jmi-slideshow', 500, 300, 1500);
 };
 	
 JMI.Corporama.Map.prototype.draw = function(options) {
@@ -52,30 +52,38 @@ JMI.Corporama.Map.prototype.Center = function(map, args) {
   var parameters = this.getParams();
   parameters.attributeId = args[0];
   parameters.analysisProfile = "DiscoveryProfile";
+  map.similar = args[0];
+  parameters.similar = map.similar;
   map.compute( parameters);
-  map.corporama.breadcrumbTitles.shortTitle = 'centered';
-  map.corporama.breadcrumbTitles.longTitle = 'centered on ' + args[1];
+  map.corporama.breadcrumbTitles.shortTitle = 'centré';
+  map.corporama.breadcrumbTitles.longTitle = 'centré sur la société ' + args[1];
 };   
 
 JMI.Corporama.Map.prototype.Focus = function(map, args) {
   var parameters = this.getParams();
   parameters.entityId = args[0];
+  if( map.similar)
+	  parameters.similar = map.similar;
   parameters.analysisProfile = "Profile";
   map.compute( parameters);
   map.corporama.breadcrumbTitles.shortTitle = 'focus';
-  map.corporama.breadcrumbTitles.longTitle = 'focus on ' + args[1];
+  map.corporama.breadcrumbTitles.longTitle = 'focus sur le tag ' + args[1];
+};   
+
+JMI.Corporama.Map.prototype.Navigate = function(map, args) {
+	window.open('http://corporama.com/search?siren=' + args[0] + '&company=' + args[1], '_blank');
 };   
 
 JMI.Corporama.Map.breadcrumbTitlesFunc = function(event) {
   if( event.type === JMI.Map.event.EMPTY) {
-	return {shortTitle: 'Sorry, the map is empty.', longTitle: 'Sorry, the map is empty.'};
+	return {shortTitle: 'La carte est vide.', longTitle: 'La carte est vide.'};
   }
   if( event.type === JMI.Map.event.ERROR) {
 	if(event.track) {
-		return {shortTitle: 'Sorry, an error occured. If you want to be informed about it, please <a title="Fill the form" href="http://www.just-map-it.com/p/report.html?track='+ event.track +'" target="_blank">fill the form</a>', longTitle: 'Sorry, an error occured. Error: ' + event.message};
+		return {shortTitle: 'Une erreur est survenue. Pour en savoir plus, <a title="Formulaire" href="http://www.just-map-it.com/p/report.html?track='+ event.track +'" target="_blank">remplissez ce formulaire</a>', longTitle: 'Une erreur esr survenue. Erreur: ' + event.message};
 	}
 	else {
-		return {shortTitle: 'Sorry, an error occured. ' + event.message, longTitle: 'Sorry, an error occured. ' + event.message};
+		return {shortTitle: 'Une erreur est survenue. ' + event.message, longTitle: 'Une erreur est survenue. ' + event.message};
 	}
   }
   return event.map.corporama.breadcrumbTitles;
