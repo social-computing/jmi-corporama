@@ -42,7 +42,7 @@
 	<affinity-reader-profile name="DiscoveryAffReader" affinity-reader-ref="*" threshold="100" max-entities="2000" />
 	<affinity-reader-profile name="GlobalAffReader" affinity-reader-ref="*" threshold="100" max-entities="2000" />
 
-	<analysis-profile name="Profile" attributes-ref="*" type="personal" attribute-size="frequency" attributes-max="50" attributes-cluster-max="6" cluster="yes" cluster-level="50" cluster-threshold="20" cluster-type="size" balanced-effect="0" entities-max="100" attributes-base-max="30" attr-link-threshold="10" links-attribute-threshold="3">
+	<analysis-profile name="Profile" attributes-ref="*" type="personal" attribute-size="frequency" attributes-max="50" attributes-cluster-max="5" cluster="yes" cluster-level="50" cluster-threshold="20" cluster-type="size" balanced-effect="0" entities-max="100" attributes-base-max="30" attr-link-threshold="10" links-attribute-threshold="3">
 		<props-mapping>
 			<entity-props-mapping>
 				<mapping key="ID" value="id" />
@@ -66,7 +66,7 @@
 		</entities-recommendation>
 	</analysis-profile>
 
-	<analysis-profile name="DiscoveryProfile" attributes-ref="*" type="discovery" attribute-size="frequency" attributes-max="50" attributes-cluster-max="6" cluster="yes" cluster-level="50" cluster-threshold="20" cluster-type="size" balanced-effect="0" entities-max="100" attributes-base-max="30" attr-link-threshold="10" links-attribute-threshold="3">
+	<analysis-profile name="DiscoveryProfile" attributes-ref="*" type="discovery" attribute-size="frequency" attributes-max="50" attributes-cluster-max="5" cluster="yes" cluster-level="50" cluster-threshold="20" cluster-type="size" balanced-effect="0" entities-max="100" attributes-base-max="30" attr-link-threshold="10" links-attribute-threshold="3">
 		<props-mapping>
 			<entity-props-mapping>
 				<mapping key="ID" value="id" />
@@ -90,7 +90,7 @@
 		</entities-recommendation>
 	</analysis-profile>
 
-	<analysis-profile name="GlobalProfile" attributes-ref="*" type="global" attribute-size="same" attributes-max="50" attributes-cluster-max="6" cluster="yes" cluster-level="50" cluster-threshold="20" cluster-type="size" balanced-effect="0" entities-max="100" attributes-base-max="30" attr-link-threshold="10" links-attribute-threshold="3">
+	<analysis-profile name="GlobalProfile" attributes-ref="*" type="global" attribute-size="same" attributes-max="50" attributes-cluster-max="5" cluster="yes" cluster-level="50" cluster-threshold="20" cluster-type="size" balanced-effect="0" entities-max="100" attributes-base-max="30" attr-link-threshold="10" links-attribute-threshold="3">
 
 		<props-mapping>
 			<entity-props-mapping>
