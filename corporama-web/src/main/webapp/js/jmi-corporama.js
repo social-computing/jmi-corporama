@@ -24,7 +24,7 @@ JMI.Corporama.Map = function(container,options) {
 	  new JMI.extensions.Breadcrumb(options.breadcrumb,this.map,{'namingFunc':JMI.Corporama.Map.breadcrumbTitlesFunc,'thumbnail':{}});
 	  this.breadcrumbTitles = { shortTitle: 'Recherche', longTitle: 'Résultat de la recherche' };
   }
-  new JMI.extensions.Slideshow(this.map, 'jmi-slideshow', 500, 300, 1500);
+  new JMI.extensions.Slideshow(this.map, 'jmi-slideshow', 500, 300, 300);
 };
 	
 JMI.Corporama.Map.prototype.draw = function(options) {
@@ -55,7 +55,7 @@ JMI.Corporama.Map.prototype.Center = function(map, args) {
   map.similar = args[0];
   parameters.similar = map.similar;
   map.compute( parameters);
-  map.corporama.breadcrumbTitles.shortTitle = 'centré';
+  map.corporama.breadcrumbTitles.shortTitle = args[1];
   map.corporama.breadcrumbTitles.longTitle = 'centré sur la société ' + args[1];
 };   
 

@@ -2,7 +2,7 @@
 
 <!DOCTYPE swatch SYSTEM "swatch.dtd">
 
-<swatch name="NODE_NORM" title="{sNAME}">
+<swatch name="NODE_NORM" >
 
 <!-- Base Satellite definition -->
     <sat shape="diskShp" transfo="baseTrf" isBack="true" isVisible="true" isSuper="true" isSub="false" isCur="false" isRest="true" isTip="false" isNoSided="false">
@@ -25,18 +25,18 @@
 <!-- Title -->
     <sat shape="voidShp" transfo="titleTrf" isSub="true" isSuper="true" isTip="true" isVisible="true" isCur="false" isRest="true" isBack="false" isNoSided="false">
         <slice alpha="1" linewidth="1">
-            <tip font="nameFnt" label="{+25.1sNAME}" textCol="34 34 34" rounded="10" isCorner="true" blur="-1" dir="SW" align="left" isFloating="false" />
+            <tip font="nameFnt" label="{+25.1sname}" textCol="34 34 34" rounded="10" isCorner="true" blur="-1" dir="SW" align="left" isFloating="false" />
         </slice>
     </sat>
 
     <sat shape="voidShp" selection="search" transfo="titleTrf" isSub="true" isVisible="true" isSuper="true" isCur="false" isRest="true" isBack="false" isTip="false" isNoSided="false">
         <slice alpha="1" linewidth="1">
-            <tip font="selFnt" label="{+25.1sNAME}" textCol="180 20 32" isCorner="true" blur="-1" rounded="10" dir="SW" align="left" isFloating="false" />
+            <tip font="selFnt" label="{+20.1sname}" textCol="180 20 32" isCorner="true" blur="-1" rounded="10" dir="SW" align="left" isFloating="false" />
         </slice>
     </sat>
 
 <!-- References -->
-    <string id="nameStr" label="{sNAME}" />
+    <string id="nameStr" label="{sname}" />
 
     <color id="blackCol" rgb="000000" />
     <color id="whiteCol" rgb="ffffff" />
@@ -67,6 +67,6 @@
         <polar dir="0" rad="1.4" />
     </transfo>
 
-    <tip id="textTip" font="nameFnt" label="{+sNAME}" textCol="@blackCol" isCorner="true" blur="-1" rounded="-1" dir="SW" align="left" isFloating="false" />
+    <tip id="textTip" font="nameFnt" label="{+sname}" textCol="@blackCol" isCorner="true" blur="-1" rounded="-1" dir="SW" align="left" isFloating="false" />
                     
 </swatch>

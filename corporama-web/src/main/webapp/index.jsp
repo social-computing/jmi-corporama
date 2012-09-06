@@ -54,7 +54,7 @@ function GoMap() {
 <div id="jmi-content">
 	<table width="100%" border="0">
 		<tr>
-			<td><a title="Just Map It! Corporama" href="./"><img alt="Just Map It! Corporama" src="./images/justmapit.png" /></a></td>
+			<td><a title="Just Map It! Corporama" href="./"><img alt="Just Map It! Corporama" src="./images/corpo-logo.jpg" /></a></td>
 			<td align="right"><a title="Just Map It!" href="http://www.just-map-it.com/" target="_blank"><img alt="Just Map It!" src="./images/justmapit_www.png" /></a></td>
 		</tr>
 	</table>
@@ -63,8 +63,10 @@ function GoMap() {
 </div>
 <div id="jmi-slideshow" style="visibility:hidden;">
 	<ul>
-		<li><p>Corporama</p></li>
-		<li><p>Bla bla bla</p></li>
+		<li><p>Cartographie sociétés en cours de modélisation</p></li>
+		<li><p>Cartographie sociétés en cours de modélisation.</p></li>
+		<li><p>Cartographie sociétés en cours de modélisation..</p></li>
+		<li><p>Cartographie sociétés en cours de modélisation...</p></li>
 	</ul>
 </div>
 </body>

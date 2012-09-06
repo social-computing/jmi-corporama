@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -42,14 +43,15 @@ public class RestProvider {
                                            @FormParam("user") String user, 
                                            @FormParam("query") String query,
                                            @FormParam("api-limit") String limit,
-                                           @FormParam("similar") String similar) 
+                                           @FormParam("similar") @DefaultValue("") String similar,
+                                           @FormParam("sim_comp_id") @DefaultValue("") String sim_comp_id) 
     {
         HttpSession session = request.getSession(true);
         String k = "";
         String result = null;//( String)session.getAttribute( k);
         if (result == null || result.length() == 0) {
             try {
-                result = extract( v, key, user, query, limit, similar);
+                result = extract( v, key, user, query, limit, similar.length() > 0 ? similar : sim_comp_id);
                 //session.setAttribute( k, result);
             }
             catch (Exception e) {
@@ -88,6 +90,14 @@ public class RestProvider {
                         att.addProperty(entry.getKey(), entry.getValue().getIntValue());
                 }
             }
+            if( att.getProperties().get( "head_count_slice") == null)
+                att.addProperty( "head_count_slice", "-");
+            if( att.getProperties().get( "zip") == null)
+                att.addProperty( "zip", "-");
+            if( att.getProperties().get( "revenue_slice") == null)
+                    att.addProperty( "revenue_slice", "-");
+            if( att.getProperties().get( "status_detail") == null)
+                att.addProperty( "status_detail", "-");
         
             JsonNode words = node.get("words");
             Iterator<String> it = words.getFieldNames(); 

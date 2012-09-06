@@ -39,7 +39,7 @@
 			<polar dir="0" rad="1.2" />
 		</transfo>
 		<slice alpha="1" linewidth="1">
-			<tip font="selFnt" label="{sNAME}" inCol="@whiteCol" textCol="34 34 34" isCorner="true" blur="-1" rounded="10" dir="SW" align="left" isFloating="false" />
+			<tip font="selFnt" label="{sname}" inCol="@whiteCol" textCol="34 34 34" isCorner="true" blur="-1" rounded="10" dir="SW" align="left" isFloating="false" />
 		</slice>
 	</sat>
 
@@ -57,12 +57,12 @@
 			<polar dir="0" rad="1.2" />
 		</transfo>
 		<slice alpha="1" linewidth="1">
-			<tip font="nameFnt" label="{sNAME}" inCol="34 34 34" textCol="@whiteCol" rounded="10" isCorner="true" blur="-1" dir="SW" align="left" isFloating="false" />
+			<tip font="nameFnt" label="{sname}" inCol="34 34 34" textCol="@whiteCol" rounded="10" isCorner="true" blur="-1" dir="SW" align="left" isFloating="false" />
 		</slice>
 	</sat>
 
 <!-- References -->
-	<string id="nameStr" label="{sNAME}" />
+	<string id="nameStr" label="{sname}" />
 
 	<color id="blackCol" rgb="000000" />
 	<color id="whiteCol" rgb="ffffff" />
@@ -96,17 +96,17 @@
 				delay="1000"
 				length="5000">
 		<tip 	font="nameFnt"
-				label="{sNAME}&lt;br/&gt;{sNAF}&lt;br/&gt;{sZIP} {sCITY}"
+				label="{sname}&lt;br/&gt;{sstatus_detail}&lt;br/&gt;{sNAF}&lt;br/&gt;CA {srevenue_slice}&lt;br/&gt;Effectifs {shead_count_slice}&lt;br/&gt;{szip} {scity}"
 				inCol="00 102 160"
 				textCol="@whiteCol"
-				align="center"
+				align="left"
 				rounded="10"
 				isFloating="true"/>
 	</tooltip>
 
 	<!-- Hover event -->
 	<event id="hoverEvt">
-		<!-- show status="Cliquez pour afficher le menu de '{sNAME}'. Double-cliquez pour afficher sa fiche." /-->
+		<!-- show status="Cliquez pour afficher le menu de '{sname}'. Double-cliquez pour afficher sa fiche." /-->
 		<pop        tooltip="tooltip"/>
 	</event>
 
@@ -116,8 +116,8 @@
 	</event>
 
 	<menu id="menu" font="menuFnt">
-		<item label="Afficher" font="nameFnt" url="javascript:Navigate({sID},{sNAME})" />
-		<item label="Centrer" font="nameFnt" url="javascript:Center({sID},{sNAME})" />
+		<item label="Afficher" font="nameFnt" url="javascript:Navigate({sid},{sname})" />
+		<item label="Centrer" font="nameFnt" url="javascript:Center({sid},{sname})" />
 		<separator />
 		<item label="[/5sPOSS_NAME]" url="javascript:Focus([sPOSS_ID],[sPOSS_NAME])" />
 	</menu>
@@ -126,7 +126,7 @@
 
 	<!-- DblClkEvt event -->
 	<event id="dblClkEvt">
-		<open url="javascript:center({sID},{sNAME})" />
+		<open url="javascript:center({sid},{sNAME})" />
 	</event>
 	
 </swatch>
