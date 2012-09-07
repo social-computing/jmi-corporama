@@ -63,7 +63,7 @@ function GoMap() {
 <div id="jmi-content">
 	<table width="100%" border="0">
 		<tr>
-			<td><a title="Corporama" href="http://corporama.com/"><img alt="Corporama" src="./images/corpo-logo.jpg" /></a></td>
+			<td><a title="Corporama" href="http://corporama.com/" target="_blank"><img alt="Corporama" src="./images/corpo-logo.jpg" /></a></td>
 			<td align="right"><a title="Just Map It!" href="http://www.just-map-it.com/" target="_blank"><img alt="Just Map It!" src="./images/justmapit_www.png" /></a></td>
 		</tr>
 	</table>
