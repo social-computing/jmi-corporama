@@ -15,6 +15,14 @@ JMI.Corporama.Map = function(container,options) {
 	  event.map.corporama[event.fn](event.map, event.args);
 	} );
   this.map.addEventListener(JMI.Map.event.READY, function(event) {
+	  var attId = event.map.getProperty('$attributeId');
+	  if( attId) {
+		var att = event.map.attributes.match(new RegExp('^' + attId + '$'),['id']);
+		if( att && att.length === 1) {
+			event.map.corporama.breadcrumbTitles.shortTitle = att[0].name;
+			event.map.corporama.breadcrumbTitles.longTitle = 'centré sur la société ' + att[0].name;
+		}
+	  }
 	} );
   this.map.addEventListener(JMI.Map.event.EMPTY, function(event) {
 	} );
@@ -26,13 +34,25 @@ JMI.Corporama.Map = function(container,options) {
   }
   new JMI.extensions.Slideshow(this.map, 'jmi-slideshow', 500, 300, 300);
 };
-	
+
+JMI.Corporama.Map.prototype.getParameterByName = function(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match ? decodeURIComponent(match[1].replace(/\+/g, ' ')) : false;
+};
+
 JMI.Corporama.Map.prototype.draw = function(options) {
   options = options || {};
   this.options.corporama = options.corporama || {};
-  var parameters = this.getParams();
-  parameters.analysisProfile='GlobalProfile';
-  this.map.compute(parameters);
+  var similar = this.getParameterByName('similar');
+  if( !similar) similar = this.getParameterByName('sim_comp_id');
+  if( !similar) {
+	  var parameters = this.getParams();
+	  parameters.analysisProfile='GlobalProfile';
+	  this.map.compute(parameters);
+  }
+  else {
+	  this.Center(this.map, [similar, this.getParameterByName('similar_company_name')]);
+  }
 };
 
 JMI.Corporama.Map.prototype.getParams = function() {
@@ -40,7 +60,7 @@ JMI.Corporama.Map.prototype.getParams = function() {
 	map: 'Corporama',
     //corporamaserverurl: 'http://localhost:8080/corporama-web',
     corporamaserverurl: 'http://corporama.just-map-it.com',
-    jsessionid: this.session
+    jsessionid: ''//this.session
   };
   for (var a in this.options.corporama) { 
 	  params[a] = this.options.corporama[a]; 
@@ -55,8 +75,6 @@ JMI.Corporama.Map.prototype.Center = function(map, args) {
   map.similar = args[0];
   parameters.similar = map.similar;
   map.compute( parameters);
-  map.corporama.breadcrumbTitles.shortTitle = args[1];
-  map.corporama.breadcrumbTitles.longTitle = 'centré sur la société ' + args[1];
 };   
 
 JMI.Corporama.Map.prototype.Focus = function(map, args) {
