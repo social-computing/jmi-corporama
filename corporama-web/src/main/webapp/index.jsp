@@ -4,6 +4,7 @@
 <title>Just Map It! Corporama</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="target- densitydpi=device-dpi, width=device-width, user-scalable=no"/>
+<link rel="stylesheet" type="text/css" href="./jmi-client/css/jmi-client.css" />
 <style type="text/css" media="screen">
 html, body {
 	height: 100%;
@@ -23,12 +24,41 @@ html, body {
 img {
 	border: 0;
 }
+.jmi-breadcrumb li { 
+	border:1px solid #666;
+ 	background:#ffffff;
+	color:#666666;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	padding:2px 10px 0px 10px;
+}
+.jmi-breadcrumb li:hover, .jmi-breadcrumb li:last-child:hover {
+ 	background:rgb(51,102,153);
+	color:rgb(255,153,0);
+}
+.jmi-breadcrumb li:last-child {
+ 	background:#ffffff;
+	color:rgb(51,102,153);
+}
+.jmi-breadcrumb li.a { 
+	color:#ffffff;
+}
+.jmi-breadcrumb-thumbnail img {
+	border:1px solid #666;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+} 
 #jmi-slideshow {
 	width: 500px;
 	height: 300px;
 	font-family:Arial, Verdana, sans-serif;	
 	background:url(http://www.google.com/ig/images/spinner.gif) no-repeat top right #ffffff;
-	border:3px solid #006699;
+	border:3px solid rgb(51,102,153);
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
 }
 #jmi-slideshow li {
 	padding: 10px 15px;
@@ -40,7 +70,6 @@ img {
 	color:#335595;
 }
 </style>
-<link rel="stylesheet" type="text/css" href="./jmi-client/css/jmi-client.css" />
 <script type="text/javascript" src="./jmi-client/jmi-client.js"></script>
 <script type="text/javascript" src="./js/jmi-corporama.js"></script>
 <script type="text/javascript">

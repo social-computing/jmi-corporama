@@ -13,7 +13,7 @@
 				<url-parameter name="v" >1.0</url-parameter>
 				<url-parameter name="key" >Y29ycG9fcGFydG</url-parameter>
 				<url-parameter name="user" >social_computing</url-parameter>
-				<url-parameter name="api-limit" >100</url-parameter>
+				<url-parameter name="api-limit" >200</url-parameter>
 				<url-parameter name="query" default="">{$query}</url-parameter>
 				<url-parameter name="similar" default="">{$similar}</url-parameter>
 			</URL-connection>

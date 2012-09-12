@@ -84,8 +84,8 @@ JMI.Corporama.Map.prototype.Focus = function(map, args) {
 	  parameters.similar = map.similar;
   parameters.analysisProfile = "Profile";
   map.compute( parameters);
-  map.corporama.breadcrumbTitles.shortTitle = 'focus';
-  map.corporama.breadcrumbTitles.longTitle = 'focus sur le tag ' + args[1];
+  map.corporama.breadcrumbTitles.shortTitle = '\'' +args[1] + '\'';
+  map.corporama.breadcrumbTitles.longTitle = 'focus sur le tag \'' + args[1] + '\'';
 };   
 
 JMI.Corporama.Map.prototype.Navigate = function(map, args) {
