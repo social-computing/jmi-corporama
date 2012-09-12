@@ -2,30 +2,30 @@
 
 <!DOCTYPE swatch SYSTEM "swatch.dtd">
 
-<swatch name="NODE_NORM" >
+<swatch name="NODE_NORM">
 
 <!-- Base Satellite definition -->
     <sat shape="diskShp" transfo="baseTrf" isBack="true" isVisible="true" isSuper="true" isSub="false" isCur="false" isRest="true" isTip="false" isNoSided="false">
-        <slice inCol="34 34 34" outCol="238 242 245" alpha="1" linewidth="1" />
-        <slice inCol="238 242 245" outCol="238 242 245" alpha="1" linewidth="1">
+        <slice inCol="40 120 173" outCol="246 246 246" alpha="1" linewidth="1" />
+        <slice inCol="246 246 246" outCol="246 246 246" alpha="1" linewidth="1">
             <transfo scale=".87" map="absolute" />
         </slice>
     </sat>
 
 <!-- Sub Spots -->
     <sat shape="diskShp" isSub="true" isSuper="false" isVisible="true" isCur="false" isRest="true" isBack="false" isTip="false" isNoSided="false">
-        <slice inCol="255 182 0" outCol="238 242 245" transfo="spotTrf" alpha="1" linewidth="1" />
+        <slice inCol="51 102 153" outCol="246 246 246" transfo="spotTrf" alpha="1" linewidth="1" />
     </sat>
 
 <!-- Super Spot -->
     <sat shape="diskShp" isVisible="true" isSuper="true" isSub="false" isCur="false" isRest="true" isBack="false" isTip="false" isNoSided="false">
-        <slice inCol="255 182 0" outCol="238 242 245" transfo="spotTrf" alpha="1" linewidth="1" />
+        <slice inCol="51 102 153" outCol="246 246 246" transfo="spotTrf" alpha="1" linewidth="1" />
     </sat>
 
 <!-- Title -->
     <sat shape="voidShp" transfo="titleTrf" isSub="true" isSuper="true" isTip="true" isVisible="true" isCur="false" isRest="true" isBack="false" isNoSided="false">
         <slice alpha="1" linewidth="1">
-            <tip font="nameFnt" label="{+25.1sname}" textCol="34 34 34" rounded="10" isCorner="true" blur="-1" dir="SW" align="left" isFloating="false" />
+            <tip font="nameFnt" label="{+25.1sname}" textCol="102 102 102" rounded="10" isCorner="true" blur="-1" dir="SW" align="left" isFloating="false" />
         </slice>
     </sat>
 

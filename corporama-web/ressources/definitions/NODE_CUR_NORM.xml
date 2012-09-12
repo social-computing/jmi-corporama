@@ -6,20 +6,20 @@
 
 <!-- Base -->
 	<sat shape="diskShp" transfo="baseTrf" hover="hoverEvt" click="clickEvt" dblClk="dblClkEvt" isSub="true" isCur="true" isVisible="true" isSuper="true" isRest="true" isBack="false" isTip="false" isNoSided="false">
-		<slice inCol="255 182 0" outCol="238 242 245" alpha="1" linewidth="1" />
-		<slice inCol="238 242 245" outCol="238 242 245" alpha="1" linewidth="1">
+		<slice inCol="255 153 0" outCol="246 246 246" alpha="1" linewidth="1" />
+		<slice inCol="246 246 246" outCol="246 246 246" alpha="1" linewidth="1">
 			<transfo scale=".87" map="absolute" />
 		</slice>
 	</sat>
 
 <!-- Rest Spots -->
 	<sat shape="diskShp" isSub="true" isVisible="true" isSuper="true" isCur="false" isRest="true" isBack="false" isTip="false" isNoSided="false">
-		<slice inCol="34 34 34" outCol="238 242 245" transfo="spotTrf" alpha="1" linewidth="1" />
+		<slice inCol="51 102 153" outCol="246 246 246" transfo="spotTrf" alpha="1" linewidth="1" />
 	</sat>
 
 <!-- Cur Spot -->
 	<sat shape="diskShp" isSub="true" isRest="false" isCur="true" isVisible="true" isSuper="true" isBack="false" isTip="false" isNoSided="false">
-		<slice inCol="34 34 34" outCol="238 242 245" transfo="spotTrf" alpha="1" linewidth="1" />
+		<slice inCol="51 102 153" outCol="246 246 246" transfo="spotTrf" alpha="1" linewidth="1" />
 	</sat>
 
 <!-- Rest Titles -->
@@ -28,7 +28,7 @@
 			<polar dir="0" rad="1.3" />
 		</transfo>
 		<slice alpha="1" linewidth="1">
-			<tip font="nameFnt" label="@nameStr" textCol="34 34 34" isCorner="true" blur="-1" rounded="-1" dir="SW" align="left" isFloating="false" />
+			<tip font="nameFnt" label="@nameStr" textCol="102 102 102" isCorner="true" blur="-1" rounded="-1" dir="SW" align="left" isFloating="false" />
 		</slice>
 	</sat>
 
@@ -57,7 +57,7 @@
 			<polar dir="0" rad="1.2" />
 		</transfo>
 		<slice alpha="1" linewidth="1">
-			<tip font="nameFnt" label="{sname}" inCol="34 34 34" textCol="@whiteCol" rounded="10" isCorner="true" blur="-1" dir="SW" align="left" isFloating="false" />
+			<tip font="nameFnt" label="{sname}" inCol="51 102 153" textCol="@whiteCol" rounded="10" isCorner="true" blur="-1" dir="SW" align="left" isFloating="false" />
 		</slice>
 	</sat>
 
@@ -92,22 +92,14 @@
 
 	<tip id="textTip" font="nameFnt" label="@nameStr" textCol="@blackCol" isCorner="true" blur="-1" rounded="-1" dir="SW" align="left" isFloating="false" />
 
-	<tooltip    id="tooltip"
-				delay="1000"
-				length="5000">
-		<tip 	font="nameFnt"
-				label="{sname}&lt;br/&gt;{sstatus_detail}&lt;br/&gt;{sNAF}&lt;br/&gt;CA {srevenue_slice}&lt;br/&gt;Effectifs {shead_count_slice}&lt;br/&gt;{szip} {scity}"
-				inCol="00 102 160"
-				textCol="@whiteCol"
-				align="left"
-				rounded="10"
-				isFloating="true"/>
+	<tooltip id="tooltip" delay="1000" length="5000">
+		<tip font="nameFnt" label="{sname}<br/>{sstatus_detail}<br/>{sNAF}<br/>CA {srevenue_slice}<br/>Effectifs {shead_count_slice}<br/>{szip} {scity}" inCol="00 102 160" textCol="@whiteCol" align="left" rounded="10" isFloating="true" blur="-1" dir="SW" isCorner="false" />
 	</tooltip>
 
 	<!-- Hover event -->
 	<event id="hoverEvt">
 		<!-- show status="Cliquez pour afficher le menu de '{sname}'. Double-cliquez pour afficher sa fiche." /-->
-		<pop        tooltip="tooltip"/>
+		<pop tooltip="tooltip" />
 	</event>
 
 	<!-- Click event -->
