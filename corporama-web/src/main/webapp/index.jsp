@@ -24,6 +24,9 @@ html, body {
 img {
 	border: 0;
 }
+.jmi-breadcrumb { 
+	padding-bottom: 5px;
+}
 .jmi-breadcrumb li { 
 	border:1px solid #666;
  	background:#ffffff;
