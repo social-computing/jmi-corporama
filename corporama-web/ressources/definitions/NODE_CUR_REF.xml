@@ -91,7 +91,7 @@
 
     <tip id="textTip" font="nameFnt" label="@nameStr" textCol="@blackCol" isCorner="true" blur="-1" rounded="-1" dir="SW" align="left" isFloating="false" />
 	<tooltip id="tooltip" delay="1000" length="5000">
-		<tip font="nameFnt" label="{sname}<br/>{sstatus_detail}<br/>{sNAF}<br/>CA {srevenue_slice}<br/>Effectifs {shead_count_slice}<br/>{szip} {scity}" inCol="00 102 160" textCol="@whiteCol" align="left" rounded="10" isFloating="true" blur="-1" dir="SW" isCorner="false" />
+		<tip font="nameFnt" label="{sname}&lt;br/&gt;{sstatus_detail}&lt;br/&gt;{sNAF}&lt;br/&gt;CA {srevenue_group}&lt;br/&gt;Effectifs {shead_count_group}&lt;br/&gt;{szip} {scity}" inCol="00 102 160" textCol="@whiteCol" align="left" rounded="10" isFloating="true" blur="-1" dir="SW" isCorner="false" />
 	</tooltip>
 
     <!-- Hover event -->
