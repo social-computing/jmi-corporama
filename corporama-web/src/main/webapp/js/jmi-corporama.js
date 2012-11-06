@@ -43,15 +43,19 @@ JMI.Corporama.Map.prototype.getParameterByName = function(name) {
 JMI.Corporama.Map.prototype.draw = function(options) {
   options = options || {};
   this.options.corporama = options.corporama || {};
+  var closeto = this.getParameterByName('closeto');
   var similar = this.getParameterByName('similar');
   if( !similar) similar = this.getParameterByName('sim_comp_id');
-  if( !similar) {
+  if( !similar && !closeto) {
 	  var parameters = this.getParams();
 	  parameters.analysisProfile='GlobalProfile';
 	  this.map.compute(parameters);
   }
   else {
-	  this.Center(this.map, [similar, this.getParameterByName('similar_company_name')]);
+	  if( closeto)
+		 this.Center(this.map, [closeto, '']);
+	  else // similar 
+		  this.Center(this.map, [similar, this.getParameterByName('similar_company_name')]);
   }
 };
 
